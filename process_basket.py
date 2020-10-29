@@ -128,4 +128,4 @@ if __name__ == '__main__':
         return jsonify({"total": response['total'], "basket_products": response['basket_products']}), status
 
 
-    app.run()
+    app.run(host='0.0.0.0')
