@@ -1,6 +1,5 @@
 from typing import List, Dict, Tuple
 import sys
-import json
 from flask import Flask, jsonify
 from flask import request
 from flask_cors import CORS, cross_origin
@@ -63,17 +62,7 @@ def get_products_info(filename: str) -> Dict[str, Tuple[str, float]]:
     return products
 
 
-app = Flask(__name__)
-CORS(app)
-
-
-@app.route('/process_basket', methods=['POST', 'OPTIONS', 'GET'])
-@cross_origin()
-def process_basket() -> (int, List[str]):
-    """
-    :return: total value and coupons applied
-    """
-    list_of_products = request.json.get('list_of_products')
+def process(list_of_products):
     products: Dict[str, Tuple[str, float]] = get_products_info(FILE_NAME)
     coffee_count: int = 0
     apples_count: int = 0
@@ -84,8 +73,9 @@ def process_basket() -> (int, List[str]):
         print("Products: ", list_of_products)
         basket = Basket([Product(i, products[i][0], products[i][1]) for i in list_of_products])
     except KeyError as ke:
-        print(f'{ke} is not present in list of products.')
-        sys.exit()
+        message = f'{ke} is not present in list of products.'
+        print(message)
+        return {"error": message, "total": 0}, 500
     for i, product in enumerate(basket.products):
         if product.type == 'product':
             if product.code == 'CF1':
@@ -112,18 +102,31 @@ def process_basket() -> (int, List[str]):
                             basket.products.insert(idx + 1, Coupon('CHMK', -products['MK1'][1]))
             elif product.code == 'OM1':
                 oatmeal_count += 1
-    total = basket.calculate_total()
-    print("Product prices: ", [i.price for i in basket.products])
+    total = float("{:.2f}".format(basket.calculate_total()))
     print("Total price expected: $", total)
-    print("Coupons applied: ", basket.get_coupons_applied())
     basket_products = [i.__dict__ for i in basket.products]
     for i in basket_products:
         if i['type'] == 'product':
             i['product'] = i['code']
         else:
             i['coupon'] = i['code']
-    print({"total": total, "basket_products": basket_products}, 200)
-    return jsonify({"total": total, "basket_products": basket_products}), 200
+    return {"total": total, "basket_products": basket_products}, 200
 
 
-app.run()
+if __name__ == '__main__':
+    app = Flask(__name__)
+    CORS(app)
+
+
+    @app.route('/process_basket', methods=['POST', 'OPTIONS', 'GET'])
+    @cross_origin()
+    def process_basket() -> (int, List[str]):
+        """
+        :return: total value and list of items in basket including coupons applied
+        """
+        list_of_items = request.json.get('list_of_items')
+        response, status = process(list_of_items)
+        return jsonify({"total": response['total'], "basket_products": response['basket_products']}), status
+
+
+    app.run()

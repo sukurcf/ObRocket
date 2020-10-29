@@ -1,0 +1,1 @@
+python /app/process_basket.py 5000 && ng serve /webapp
