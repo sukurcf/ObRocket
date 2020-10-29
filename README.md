@@ -14,12 +14,15 @@ Couldn't implement 4th coupon **APOM** as I couldn't understand the requirement 
 
 ## Steps to run.
 1. Build the docker image using the Dockerfile provided and following command:
+   
    `docker build -t objectrocket:sukurcf .`
 2. Run the docker container using following command.
-    `docker run -p 5000:5000 -p 4200:4200 objectrocket:sukurcf`
-3. API server and Angular app will be up and running. Open the browser and hit 
-    http://localhost:4200/ to see Angular app. You can add new items from UI and the list will be automatically updated and coupons will be automatically applied.
+   
+   `docker run -p 5000:5000 -p 4200:4200 objectrocket:sukurcf`
+3. API server and Angular app will be up and running. Open the browser and hit http://localhost:4200/ to see Angular app. 
+   You can add new items from UI and the list will be automatically updated and coupons will be automatically applied.
 4. After cloning the repo locally, run test cases locally using below command:
-    `python test_process_basket.py`
+   
+   `python test_process_basket.py`
 
 Note: Please let me know if 4th coupon **APOM** also need to be implemented. Also please provide few example scenarios for the same to understand it better. 
