@@ -3,6 +3,7 @@ import sys
 import json
 from flask import Flask, jsonify
 from flask import request
+from flask_cors import CORS, cross_origin
 
 FILE_NAME = 'products_list.txt'
 APPLE_DISCOUNTED_PRICE = 4.5
@@ -63,9 +64,11 @@ def get_products_info(filename: str) -> Dict[str, Tuple[str, float]]:
 
 
 app = Flask(__name__)
+CORS(app)
 
 
-@app.route('/process_basket', methods=['POST'])
+@app.route('/process_basket', methods=['POST', 'OPTIONS', 'GET'])
+@cross_origin()
 def process_basket() -> (int, List[str]):
     """
     :return: total value and coupons applied
@@ -113,8 +116,14 @@ def process_basket() -> (int, List[str]):
     print("Product prices: ", [i.price for i in basket.products])
     print("Total price expected: $", total)
     print("Coupons applied: ", basket.get_coupons_applied())
-    basket_products = json.dumps({"products": [i.__dict__ for i in basket.products]})
-    return jsonify({"total": total, "basket_products": basket_products})
+    basket_products = [i.__dict__ for i in basket.products]
+    for i in basket_products:
+        if i['type'] == 'product':
+            i['product'] = i['code']
+        else:
+            i['coupon'] = i['code']
+    print({"total": total, "basket_products": basket_products}, 200)
+    return jsonify({"total": total, "basket_products": basket_products}), 200
 
 
 app.run()
