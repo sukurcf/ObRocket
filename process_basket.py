@@ -1,5 +1,4 @@
 from typing import List, Dict, Tuple
-import sys
 from flask import Flask, jsonify
 from flask import request
 from flask_cors import CORS, cross_origin
