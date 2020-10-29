@@ -7,4 +7,5 @@ RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
     npm install -g @angular/cli
 RUN git clone https://github.com/sukurcf/ObRocket.git /app
 RUN git clone https://github.com/sukurcf/ObRocket-UI.git /webapp
+RUN chmod +x /app/entrypoint.sh
 CMD ["./entrypoint.sh"]
