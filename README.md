@@ -3,9 +3,17 @@ https://gist.github.com/jbartels/d75a9f5282abebe071694723a5f25f0e
 
 ## Overview:
 This app depends on both Flask app and Angular app.
+
 Used **rackspacedot/python38** as base image.
-This repo contains Flask app and test cases. Angular app is hosted on separate repo - https://github.com/sukurcf/ObRocket-UI.git to keep it modular.
-Users can add items from list available. Total and price of each item, coupons applied will be updated automatically once the user hits enter or click the **ADD ITEM** button in UI.
+
+This repo contains Flask app and test cases. 
+
+Angular app is hosted on separate repo - https://github.com/sukurcf/ObRocket-UI.git to keep it modular.
+
+Users can add items from list available. 
+
+Total and price of each item, coupons applied will be updated automatically once the user hits enter or click the **ADD ITEM** button in UI.
+
 Implemented 3 out of 4 coupons - **BOGO**, **APPL**, **CHMK**. 
 Couldn't implement 4th coupon **APOM** as I couldn't understand the requirement clearly as there were no example cases in test cases.
 
@@ -25,4 +33,5 @@ Couldn't implement 4th coupon **APOM** as I couldn't understand the requirement 
    
    `python test_process_basket.py`
 
-Note: Please let me know if 4th coupon **APOM** also need to be implemented. Also please provide few example scenarios for the same to understand it better. 
+## Note: 
+Please let me know if 4th coupon **APOM** also need to be implemented. Also please provide few example scenarios for the same to understand it better. 
