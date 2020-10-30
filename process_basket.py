@@ -81,6 +81,7 @@ def process(list_of_products):
             if product.code == 'CF1':
                 coffee_count += 1
                 if coffee_count % 2 == 0:
+                    # Applying BOGO coupon
                     basket.products.insert(i + 1, Coupon('BOGO', -products['CF1'][1]))
             elif product.code == 'AP1':
                 apples_count += 1
@@ -88,8 +89,10 @@ def process(list_of_products):
                     apple_indexes = [idx for idx, item in enumerate(basket.products[:i]) if
                                      type(item) == Product and item.code == 'AP1']
                     for count, idx in enumerate(apple_indexes, start=1):
+                        # Applying APPL coupon
                         basket.products.insert(idx + count, Coupon('APPL', -1.5))
                 elif apples_count > 3:
+                    # Applying APPL coupon
                     basket.products.insert(i + 1, Coupon('APPL', -1.5))
             elif product.code in ('CH1', 'MK1'):
                 if product.code == 'CH1':
@@ -99,6 +102,7 @@ def process(list_of_products):
                 if chai_count >= 1 and milk_count >= 1 and not CHMK_applied:
                     for idx, item in enumerate(basket.products[:i + 1]):
                         if type(item) == Product and item.code == 'MK1':
+                            # Applying CHMK coupon
                             basket.products.insert(idx + 1, Coupon('CHMK', -products['MK1'][1]))
                             break
                     CHMK_applied = True
