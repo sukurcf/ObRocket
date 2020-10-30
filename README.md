@@ -17,11 +17,13 @@ Total and price of each item, coupons applied will be updated automatically once
 Implemented 3 out of 4 coupons - **BOGO**, **APPL**, **CHMK**. 
 Couldn't implement 4th coupon **APOM** as I couldn't understand the requirement clearly as there were no example cases in test cases.
 
+I thought of using database for storing items. But realised that it becomes much complex for this simple use case.
+
 ## Pre-requisites:
 1. Docker
 
 ## Steps to run.
-Run the commands in powershell. 
+Run the commands in **powershell**. 
 
 1. Build the docker image using the Dockerfile provided and following command:
    
