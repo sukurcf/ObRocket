@@ -21,6 +21,8 @@ Couldn't implement 4th coupon **APOM** as I couldn't understand the requirement 
 1. Docker
 
 ## Steps to run.
+Run the commands in powershell. 
+
 1. Build the docker image using the Dockerfile provided and following command:
    
    `docker build -t objectrocket:sukurcf .`
