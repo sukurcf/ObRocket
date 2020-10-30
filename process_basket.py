@@ -68,6 +68,7 @@ def process(list_of_products):
     chai_count: int = 0
     milk_count: int = 0
     oatmeal_count: int = 0
+    CHMK_applied: bool = False
     try:
         print("Products: ", list_of_products)
         basket = Basket([Product(i, products[i][0], products[i][1]) for i in list_of_products])
@@ -95,10 +96,12 @@ def process(list_of_products):
                     chai_count += 1
                 elif product.code == 'MK1':
                     milk_count += 1
-                if chai_count == 1 and milk_count == 1:
+                if chai_count >= 1 and milk_count >= 1 and not CHMK_applied:
                     for idx, item in enumerate(basket.products[:i + 1]):
                         if type(item) == Product and item.code == 'MK1':
                             basket.products.insert(idx + 1, Coupon('CHMK', -products['MK1'][1]))
+                            break
+                    CHMK_applied = True
             elif product.code == 'OM1':
                 oatmeal_count += 1
     total = float("{:.2f}".format(basket.calculate_total()))
