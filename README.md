@@ -36,6 +36,8 @@ Run the commands in **powershell**.
 4. After cloning the repo locally, run test cases locally using below command:
    
    `python test_process_basket.py`
+   
+![Farmer's Market](./farmers_market.jpg)
 
 ## Note: 
 Please let me know if 4th coupon **APOM** also need to be implemented. Also please provide few example scenarios for the same to understand it better. 
