@@ -37,7 +37,7 @@ Run the commands in **powershell**.
    
    `python test_process_basket.py`
    
-![Farmer's Market](./farmers_market.jpg)
+![Farmer's Market](https://github.com/sukurcf/ObRocket/blob/main/farmers_market.JPG)
 
 ## Note: 
 Please let me know if 4th coupon **APOM** also need to be implemented. Also please provide few example scenarios for the same to understand it better. 
